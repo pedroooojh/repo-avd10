@@ -4,3 +4,5 @@ pymongo
 sqlalchemy
 psycopg2-binary
 python-dotenv
+scikit-learn
+matplotlib

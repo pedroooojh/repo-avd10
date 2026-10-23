@@ -1,6 +1,8 @@
 import pandas as pd
 import requests
 from pymongo import MongoClient
+from sqlalchemy import create_engine
+
 
 from src import config
 
@@ -35,3 +37,11 @@ class Extract:
 
         print(f"[extract] {len(documentos)} documentos lidos da bronze")
         return pd.DataFrame(documentos)
+    
+    def ler_silver(self):
+        engine = create_engine(config.NEON_URL)
+        df = pd.read_sql(f"SELECT * FROM {config.TABELA_SILVER}", engine)
+        engine.dispose()
+
+        print(f"[extract] {len(df)} linhas lidas da silver")
+        return df
